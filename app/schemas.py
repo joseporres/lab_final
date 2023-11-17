@@ -3,7 +3,7 @@ from typing import List
 
 
 class MovieSchema(BaseModel):
-    id: int
+    movieId: int
     title: str
     genres: str
 
@@ -12,17 +12,16 @@ class MovieSchema(BaseModel):
 
     def serialize(self):
         return {
-            "id": self.id,
+            "movieId": self.movieId,
             "title": self.title,
             "genres": self.genres
         }
 
 
 class RatingSchema(BaseModel):
-    id: int
     userId: int
     movieId: int
-    rating: int
+    rating: float
     timestamp: int
 
     class Config:
@@ -30,7 +29,6 @@ class RatingSchema(BaseModel):
 
     def serialize(self):
         return {
-            "id": self.id,
             "userId": self.userId,
             "movieId": self.movieId,
             "rating": self.rating,
@@ -39,7 +37,6 @@ class RatingSchema(BaseModel):
 
 
 class TagSchema(BaseModel):
-    id: int
     userId: int
     movieId: int
     tag: str
@@ -50,7 +47,6 @@ class TagSchema(BaseModel):
 
     def serialize(self):
         return {
-            "id": self.id,
             "userId": self.userId,
             "movieId": self.movieId,
             "tag": self.tag,

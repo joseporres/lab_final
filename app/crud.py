@@ -11,7 +11,7 @@ def addChunkMovies(db:Session, movies: list[schemas.MovieSchema]):
         insert(models.Movie)
         .values(values)
         .on_conflict_do_update(
-            index_elements=['id'],
+            index_elements=['movieId'],
             set_={'title': insert(models.Movie).excluded.title, 'genres': insert(models.Movie).excluded.genres}
         )
     )
@@ -27,7 +27,7 @@ def addChunkTags(db:Session, tags: list[schemas.TagSchema]):
         insert(models.Tag)
         .values(values)
         .on_conflict_do_update(
-            index_elements=['id'],
+            index_elements=['userId', 'movieId', 'tag'],
             set_={'userId': insert(models.Tag).excluded.userId, 'movieId': insert(models.Tag).excluded.movieId, 'tag': insert(models.Tag).excluded.tag, 'timestamp': insert(models.Tag).excluded.timestamp}
         )
     )
@@ -43,7 +43,7 @@ def addChunkRatings(db:Session, ratings: list[schemas.RatingSchema]):
         insert(models.Rating)
         .values(values)
         .on_conflict_do_update(
-            index_elements=['id'],
+            index_elements=['userId', 'movieId', 'rating'],
             set_={'userId': insert(models.Rating).excluded.userId, 'movieId': insert(models.Rating).excluded.movieId, 'rating': insert(models.Rating).excluded.rating, 'timestamp': insert(models.Rating).excluded.timestamp}
         )
     )
