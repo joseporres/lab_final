@@ -21,7 +21,7 @@ class MovieSchema(BaseModel):
 class RatingSchema(BaseModel):
     userId: int
     movieId: int
-    rating: int
+    rating: float
     timestamp: int
 
     class Config:
