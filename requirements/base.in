@@ -1,6 +1,12 @@
 fastapi
 uvicorn[standard]
 pymongo
+pydantic
 ipykernel
 pydantic_settings
 requests
+sqlalchemy
+pymysql
+sqlalchemy-libsql
+chromadb
+openai==0.28
