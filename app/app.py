@@ -5,6 +5,8 @@ import uvicorn
 from fastapi.responses import JSONResponse
 import app.services as services
 import xml.etree.ElementTree as ET
+from app.models import Movie, Rating, Tag
+from app.database import Base, engine, SessionLocal
 
 
 app = FastAPI(
@@ -25,11 +27,21 @@ app.add_middleware(
 
 app.router.prefix = api_settings.PREFIX
 
+@app.get("/insert")
+def insert():
+    services.insert_movie_csv()
+    services.insert_rating_csv()
+    services.insert_tag_csv()
+    return {"message": "Insert data to database"}
+
 @app.get("/")
 def root():
     return {"message": f"Welcome to {api_settings.TITLE}"}
 
 def run():
+    Movie.metadata.create_all(bind=engine)
+    Rating.metadata.create_all(bind=engine)
+    Tag.metadata.create_all(bind=engine)
     uvicorn.run(app,
                 host=api_settings.HOST,
                 port=api_settings.PORT,

@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     PORT: int
     TITLE: str
     PREFIX: str
+    SQLALCHEMY_DATABASE_URL: str
 
 
 
