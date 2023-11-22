@@ -6,7 +6,9 @@ from fastapi.responses import JSONResponse
 import app.services as services
 import xml.etree.ElementTree as ET
 from app.database import engine
-from app.base import Base
+from app.models import Movie, Rating, Tag
+from app.database import Base, engine, SessionLocal
+
 
 app = FastAPI(
     title=api_settings.TITLE,
@@ -39,11 +41,13 @@ def root():
 
 
 def create_tables():
-    Base.metadata.create_all(bind=engine)
-    # Rating.metadata.create_all(bind=engine)
-    # Tag.metadata.create_all(bind=engine)
+    # Base.metadata.create_all(bind=engine)
+    Movie.metadata.create_all(bind=engine)
+    Rating.metadata.create_all(bind=engine)
+    Tag.metadata.create_all(bind=engine)
 
 def run():
+    create_tables()
     uvicorn.run(app,
                 host=api_settings.HOST,
                 port=api_settings.PORT,

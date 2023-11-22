@@ -1,34 +1,27 @@
 import csv
 from . import models, schemas,crud
 from .database import SessionLocal
+import pandas as pd
 
-def insert_movie_csv(): 
-    movies = []
-    with open('./data/movies.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            movies.append(schemas.MovieSchema(**row))
-    with SessionLocal() as db:
-        crud.addChunkMovies(db,movies)
-        return {"status": "success", "message": f"Success insert {len(movies)} data of movies.csv"}
-    
+CHUNK_SIZE = 1000  # Adjust the chunk size as needed
 
-def insert_rating_csv(): 
-    ratings = []
-    with open('data/ratings.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            ratings.append(schemas.RatingSchema(**row))
+def insert_movie_csv():
     with SessionLocal() as db:
-        crud.addChunkRatings(db,ratings)
-        return {"status": "success", "message": f"Success insert {len(ratings)} data of ratings.csv"}
+        for chunk in pd.read_csv('./data/movies.csv', chunksize=CHUNK_SIZE):
+            movies = [schemas.MovieSchema(**row) for _, row in chunk.iterrows()]
+            crud.addChunkMovies(db, movies)
+        return {"status": "success", "message": "Successfully inserted data from movies.csv"}
+
+def insert_rating_csv():
+    with SessionLocal() as db:
+        for chunk in pd.read_csv('./data/ratings.csv', chunksize=CHUNK_SIZE):
+            ratings = [schemas.RatingSchema(**row) for _, row in chunk.iterrows()]
+            crud.addChunkRatings(db, ratings)
+        return {"status": "success", "message": "Successfully inserted data from ratings.csv"}
 
 def insert_tag_csv():
-    tags = []
-    with open('data/tags.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            tags.append(schemas.TagSchema(**row))
     with SessionLocal() as db:
-        crud.addChunkTags(db,tags)
-        return {"status": "success", "message": f"Success insert {len(tags)} data of tags.csv"}
+        for chunk in pd.read_csv('./data/tags.csv', chunksize=CHUNK_SIZE):
+            tags = [schemas.TagSchema(**row) for _, row in chunk.iterrows()]
+            crud.addChunkTags(db, tags)
+        return {"status": "success", "message": "Successfully inserted data from tags.csv"}

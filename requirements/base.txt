@@ -135,6 +135,7 @@ numpy==1.26.2
     #   chroma-hnswlib
     #   chromadb
     #   onnxruntime
+    #   pandas
 onnxruntime==1.16.2
     # via chromadb
 openai==0.28.0
@@ -146,6 +147,8 @@ packaging==23.2
     #   huggingface-hub
     #   ipykernel
     #   onnxruntime
+pandas==2.1.3
+    # via -r requirements/base.in
 parso==0.8.3
     # via jedi
 pexpect==4.8.0
@@ -189,11 +192,14 @@ pypika==0.48.9
 python-dateutil==2.8.2
     # via
     #   jupyter-client
+    #   pandas
     #   posthog
 python-dotenv==1.0.0
     # via
     #   pydantic-settings
     #   uvicorn
+pytz==2023.3.post1
+    # via pandas
 pyyaml==6.0.1
     # via
     #   huggingface-hub
@@ -264,6 +270,8 @@ typing-extensions==4.8.0
     #   starlette
     #   typer
     #   uvicorn
+tzdata==2023.3
+    # via pandas
 urllib3==2.0.6
     # via requests
 uvicorn[standard]==0.23.2
