@@ -1,7 +1,11 @@
 import csv
-from . import models, schemas,crud
-from .database import SessionLocal
+from app import models, schemas,crud
+from app.database import SessionLocal
 import pandas as pd
+from app.chromadb import client,collection
+# from chromadb.utils import embedding_functions
+# from chromadb.config import Settings
+
 
 CHUNK_SIZE = 1000  # Adjust the chunk size as needed
 
@@ -25,3 +29,13 @@ def insert_tag_csv():
             tags = [schemas.TagSchema(**row) for _, row in chunk.iterrows()]
             crud.addChunkTags(db, tags)
         return {"status": "success", "message": "Successfully inserted data from tags.csv"}
+    
+def getMoviesByPront(prompt,n_results=1):
+    results = collection.query(
+    query_texts=[prompt],
+    n_results=n_results
+    )
+    #traeme los documentos en merge por salto de linea 
+    documents=  results['documents'][0]
+    formated_documents = '\n'.join(documents)
+    return formated_documents

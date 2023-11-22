@@ -8,7 +8,7 @@ class MovieSchema(BaseModel):
     genres: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     def serialize(self):
         return {
@@ -25,7 +25,7 @@ class RatingSchema(BaseModel):
     timestamp: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     def serialize(self):
         return {
@@ -43,7 +43,7 @@ class TagSchema(BaseModel):
     timestamp: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     def serialize(self):
         return {

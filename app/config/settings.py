@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings,SettingsConfigDict
 
-__all__ = ("api_settings")
+# __all__ = ("api_settings")
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     TITLE: str
     PREFIX: str
     SQLALCHEMY_DATABASE_URL: str
+    REDIS_URL: str
 
 
 
