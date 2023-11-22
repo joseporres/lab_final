@@ -12,3 +12,4 @@ chromadb
 openai==0.28
 alembic
 pandas
+streamlit
