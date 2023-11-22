@@ -14,3 +14,4 @@ alembic
 pandas
 streamlit
 aioredis
+redis

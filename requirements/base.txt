@@ -29,6 +29,7 @@ async-timeout==4.0.3
     # via
     #   aiohttp
     #   aioredis
+    #   redis
 attrs==23.1.0
     # via
     #   aiohttp
@@ -262,6 +263,8 @@ pyzmq==25.1.1
     # via
     #   ipykernel
     #   jupyter-client
+redis==5.0.1
+    # via -r requirements/base.in
 referencing==0.31.0
     # via
     #   jsonschema

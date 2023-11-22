@@ -37,5 +37,6 @@ def getMoviesByPront(prompt,n_results=1):
     )
     #traeme los documentos en merge por salto de linea 
     documents=  results['documents'][0]
-    formated_documents = '\n'.join(documents)
+    formated_documents = '\n\n'.join(documents)
+    # print(formated_documents)
     return formated_documents
