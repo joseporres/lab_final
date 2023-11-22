@@ -6,6 +6,7 @@
 #
 aiohttp==3.8.6
     # via
+    #   langchain
     #   libsql-client
     #   openai
 aioredis==2.0.1
@@ -21,6 +22,7 @@ annotated-types==0.6.0
 anyio==3.7.1
     # via
     #   fastapi
+    #   langchain
     #   starlette
     #   watchfiles
 asttokens==2.4.0
@@ -29,6 +31,7 @@ async-timeout==4.0.3
     # via
     #   aiohttp
     #   aioredis
+    #   langchain
     #   redis
 attrs==23.1.0
     # via
@@ -59,6 +62,7 @@ chromadb==0.4.14
     # via -r requirements/base.in
 click==8.1.7
     # via
+    #   nltk
     #   streamlit
     #   typer
     #   uvicorn
@@ -66,6 +70,8 @@ coloredlogs==15.0.1
     # via onnxruntime
 comm==0.1.4
     # via ipykernel
+dataclasses-json==0.6.2
+    # via langchain
 debugpy==1.8.0
     # via ipykernel
 decorator==5.1.1
@@ -83,7 +89,11 @@ fastapi==0.103.2
     #   -r requirements/base.in
     #   chromadb
 filelock==3.13.1
-    # via huggingface-hub
+    # via
+    #   huggingface-hub
+    #   torch
+    #   transformers
+    #   triton
 flatbuffers==23.5.26
     # via onnxruntime
 frozenlist==1.4.0
@@ -91,7 +101,9 @@ frozenlist==1.4.0
     #   aiohttp
     #   aiosignal
 fsspec==2023.10.0
-    # via huggingface-hub
+    # via
+    #   huggingface-hub
+    #   torch
 gitdb==4.0.11
     # via gitpython
 gitpython==3.1.40
@@ -105,7 +117,10 @@ h11==0.14.0
 httptools==0.6.0
     # via uvicorn
 huggingface-hub==0.19.4
-    # via tokenizers
+    # via
+    #   sentence-transformers
+    #   tokenizers
+    #   transformers
 humanfriendly==10.0
     # via coloredlogs
 idna==3.4
@@ -129,6 +144,15 @@ jinja2==3.1.2
     # via
     #   altair
     #   pydeck
+    #   torch
+joblib==1.3.2
+    # via
+    #   nltk
+    #   scikit-learn
+jsonpatch==1.33
+    # via langchain
+jsonpointer==2.4
+    # via jsonpatch
 jsonschema==4.20.0
     # via altair
 jsonschema-specifications==2023.11.1
@@ -139,6 +163,10 @@ jupyter-core==5.3.2
     # via
     #   ipykernel
     #   jupyter-client
+langchain==0.0.339
+    # via -r requirements/base.in
+langsmith==0.0.66
+    # via langchain
 libsql-client==0.3.0
     # via sqlalchemy-libsql
 mako==1.3.0
@@ -149,6 +177,8 @@ markupsafe==2.1.3
     # via
     #   jinja2
     #   mako
+marshmallow==3.20.1
+    # via dataclasses-json
 matplotlib-inline==0.1.6
     # via
     #   ipykernel
@@ -163,18 +193,61 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
+mypy-extensions==1.0.0
+    # via typing-inspect
 nest-asyncio==1.5.8
     # via ipykernel
+networkx==3.2.1
+    # via torch
+nltk==3.8.1
+    # via sentence-transformers
 numpy==1.26.2
     # via
     #   altair
     #   chroma-hnswlib
     #   chromadb
+    #   langchain
     #   onnxruntime
     #   pandas
     #   pyarrow
     #   pydeck
+    #   scikit-learn
+    #   scipy
+    #   sentence-transformers
     #   streamlit
+    #   torchvision
+    #   transformers
+nvidia-cublas-cu12==12.1.3.1
+    # via
+    #   nvidia-cudnn-cu12
+    #   nvidia-cusolver-cu12
+    #   torch
+nvidia-cuda-cupti-cu12==12.1.105
+    # via torch
+nvidia-cuda-nvrtc-cu12==12.1.105
+    # via torch
+nvidia-cuda-runtime-cu12==12.1.105
+    # via torch
+nvidia-cudnn-cu12==8.9.2.26
+    # via torch
+nvidia-cufft-cu12==11.0.2.54
+    # via torch
+nvidia-curand-cu12==10.3.2.106
+    # via torch
+nvidia-cusolver-cu12==11.4.5.107
+    # via torch
+nvidia-cusparse-cu12==12.1.0.106
+    # via
+    #   nvidia-cusolver-cu12
+    #   torch
+nvidia-nccl-cu12==2.18.1
+    # via torch
+nvidia-nvjitlink-cu12==12.3.101
+    # via
+    #   nvidia-cusolver-cu12
+    #   nvidia-cusparse-cu12
+nvidia-nvtx-cu12==12.1.105
+    # via torch
 onnxruntime==1.16.2
     # via chromadb
 openai==0.28.0
@@ -186,8 +259,10 @@ packaging==23.2
     #   altair
     #   huggingface-hub
     #   ipykernel
+    #   marshmallow
     #   onnxruntime
     #   streamlit
+    #   transformers
 pandas==2.1.3
     # via
     #   -r requirements/base.in
@@ -200,7 +275,9 @@ pexpect==4.8.0
 pickleshare==0.7.5
     # via ipython
 pillow==10.1.0
-    # via streamlit
+    # via
+    #   streamlit
+    #   torchvision
 platformdirs==3.11.0
     # via jupyter-core
 posthog==3.0.2
@@ -226,6 +303,8 @@ pydantic==2.4.2
     #   -r requirements/base.in
     #   chromadb
     #   fastapi
+    #   langchain
+    #   langsmith
     #   pydantic-settings
 pydantic-core==2.10.1
     # via pydantic
@@ -258,6 +337,8 @@ pytz==2023.3.post1
 pyyaml==6.0.1
     # via
     #   huggingface-hub
+    #   langchain
+    #   transformers
     #   uvicorn
 pyzmq==25.1.1
     # via
@@ -269,20 +350,42 @@ referencing==0.31.0
     # via
     #   jsonschema
     #   jsonschema-specifications
+regex==2023.10.3
+    # via
+    #   nltk
+    #   tiktoken
+    #   transformers
 requests==2.31.0
     # via
     #   -r requirements/base.in
     #   chromadb
     #   huggingface-hub
+    #   langchain
+    #   langsmith
     #   openai
     #   posthog
     #   streamlit
+    #   tiktoken
+    #   torchvision
+    #   transformers
 rich==13.7.0
     # via streamlit
 rpds-py==0.13.1
     # via
     #   jsonschema
     #   referencing
+safetensors==0.4.0
+    # via transformers
+scikit-learn==1.3.2
+    # via sentence-transformers
+scipy==1.11.4
+    # via
+    #   scikit-learn
+    #   sentence-transformers
+sentence-transformers==2.2.2
+    # via -r requirements/base.in
+sentencepiece==0.1.99
+    # via sentence-transformers
 six==1.16.0
     # via
     #   asttokens
@@ -296,6 +399,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/base.in
     #   alembic
+    #   langchain
     #   sqlalchemy-libsql
 sqlalchemy-libsql==0.1.0
     # via -r requirements/base.in
@@ -306,15 +410,31 @@ starlette==0.27.0
 streamlit==1.28.2
     # via -r requirements/base.in
 sympy==1.12
-    # via onnxruntime
+    # via
+    #   onnxruntime
+    #   torch
 tenacity==8.2.3
-    # via streamlit
+    # via
+    #   langchain
+    #   streamlit
+threadpoolctl==3.2.0
+    # via scikit-learn
+tiktoken==0.5.1
+    # via -r requirements/base.in
 tokenizers==0.15.0
-    # via chromadb
+    # via
+    #   chromadb
+    #   transformers
 toml==0.10.2
     # via streamlit
 toolz==0.12.0
     # via altair
+torch==2.1.1
+    # via
+    #   sentence-transformers
+    #   torchvision
+torchvision==0.16.1
+    # via sentence-transformers
 tornado==6.3.3
     # via
     #   ipykernel
@@ -324,7 +444,10 @@ tqdm==4.66.1
     # via
     #   chromadb
     #   huggingface-hub
+    #   nltk
     #   openai
+    #   sentence-transformers
+    #   transformers
 traitlets==5.11.2
     # via
     #   comm
@@ -333,6 +456,10 @@ traitlets==5.11.2
     #   jupyter-client
     #   jupyter-core
     #   matplotlib-inline
+transformers==4.35.2
+    # via sentence-transformers
+triton==2.1.0
+    # via torch
 typer==0.9.0
     # via chromadb
 typing-extensions==4.8.0
@@ -350,8 +477,12 @@ typing-extensions==4.8.0
     #   sqlalchemy
     #   starlette
     #   streamlit
+    #   torch
     #   typer
+    #   typing-inspect
     #   uvicorn
+typing-inspect==0.9.0
+    # via dataclasses-json
 tzdata==2023.3
     # via pandas
 tzlocal==5.2

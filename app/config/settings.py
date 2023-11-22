@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     PREFIX: str
     SQLALCHEMY_DATABASE_URL: str
     REDIS_URL: str
+    OPEN_AI_KEY: str
 
 
 

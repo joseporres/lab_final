@@ -9,9 +9,12 @@ sqlalchemy
 pymysql
 sqlalchemy-libsql
 chromadb
-openai==0.28
+openai==0.28.0
 alembic
 pandas
 streamlit
 aioredis
 redis
+langchain
+sentence_transformers
+tiktoken

@@ -3,6 +3,7 @@ from app import models, schemas,crud
 from app.database import SessionLocal
 import pandas as pd
 from app.chromadb import client,collection
+from app.langchain import qa
 # from chromadb.utils import embedding_functions
 # from chromadb.config import Settings
 
@@ -40,3 +41,8 @@ def getMoviesByPront(prompt,n_results=1):
     formated_documents = '\n\n'.join(documents)
     # print(formated_documents)
     return formated_documents
+
+
+def movieProntOpenAi(prompt):
+    result = qa.run(prompt)
+    return result
