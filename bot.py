@@ -57,7 +57,7 @@ def run():
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response})
 
-        redis.set(f'{type}_chat_history', json.dumps(st.session_state.messages))
+        redis.set(f'{selected_type}_chat_history', json.dumps(st.session_state.messages))
 
 if __name__ == '__main__':
     run()
